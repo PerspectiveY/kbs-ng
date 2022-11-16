@@ -6,6 +6,48 @@
         header("Location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
     }
 ?>
+
+<style>
+
+    .changeQuantity, .addQuantity, .removeQuantity, .checkoutbtn {
+        display: inline-block;
+        padding: 5px 5px;
+        font-size: 20px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #676EFF;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 7px #9598ff;
+        box-shadow: 0 7px #9598ff;
+    }
+
+    .changeQuantity:hover, .addQuantity:hover, .removeQuantity:hover, .checkoutbtn:hover {background-color: #3741ff
+    }
+
+    .changeQuantity:active, .addQuantity:active, .removeQuantity:active, .checkoutbtn:active {
+        background-color: #3741ff;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+    }
+    
+    .changeQuantity{
+        margin: 15px 0;
+    }
+
+    .addQuantity{
+        padding: 15px 0;
+    }
+
+    .removeQuantity{
+        margin-top: 15px;
+    }
+
+
+</style>
 <div class="row" id="Content">
     <div id="CenteredContent">
         <div id="ArticleHeader">
@@ -38,7 +80,7 @@
                                                 <input type="number" name="quantity" value="<?php echo $product['quantityInCart']; ?>">
                                                 <input type="hidden" name="action" value="changeQuantity">
                                                 <input type="hidden" name="productId" value="<?php echo $product['StockItemID']; ?>">
-                                                <input type="submit" value="Wijzig">   
+                                                <input type="submit" value="Wijzig" class="changeQuantity">   
                                             </form>
                                         </td>
                                         <!-- format the price as: €49,99 -->
@@ -50,13 +92,13 @@
                                             <form action="/cart.php">
                                                 <input type="hidden" name="action" value="addOneToCart">
                                                 <input type="hidden" name="productId" value="<?php echo $product['StockItemID']; ?>">
-                                                <input type="submit" value="+">
+                                                <input type="submit" value="+" class="addQuantity">
                                             </form>
 
                                             <form action="/cart.php">
                                                 <input type="hidden" name="action" value="removeOneFromCart">
                                                 <input type="hidden" name="productId" value="<?php echo $product['StockItemID']; ?>">
-                                                <input type="submit" value="-">
+                                                <input type="submit" value="-" class="removeQuantity">
                                             </form>
                                         </td>
                                     </tr>
@@ -65,7 +107,12 @@
                             ?>
                         </tbody>
                     </table>    
-
+                    <div class="row">
+                        <div class="col-12" style="position: relative;">
+                            <h3 class="StockItemNameViewSize StockItemName">Totaal: <?php echo '€' . number_format($totalPrice, 2, ',', '.'); ?></h3>
+                            <!-- add a button to view cart -->
+                            <a href="/cart.php" class="btn btn-primary checkoutbtn" style="position: absolute; bottom: 15px; right: 0;">Afrekenen</a>
+                    </div>
         </div>
     </div>
 </div>

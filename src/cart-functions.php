@@ -85,7 +85,11 @@ function changeQuantity($productId, $quantity){
     $cart = getCart();
     if (!isStringVulnerable($productId)){
         if(array_key_exists($productId, $cart)){
-            $cart[$productId] = $quantity;
+            if($quantity <= 0){
+                unset($cart[$productId]);
+            } else {
+                $cart[$productId] = $quantity;
+            }
         }
     }
     saveCart($cart);
